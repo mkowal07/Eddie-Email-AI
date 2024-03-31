@@ -42,12 +42,12 @@ async def schedule_email_checks(update: Update, context: CallbackContext) -> Non
     try:
         context.job_queue.run_repeating(
             callback=check_emails,
-            interval=30,
+            interval=600,
             first=0,
             data={"chat_id": chat_id},  # Passed to the job through `data`
             name=str(chat_id)
         )
-        await update.effective_message.reply_text('Email checking scheduled every 5 minutes.')
+        await update.effective_message.reply_text('Email checking scheduled every 10 minutes.')
         logging.info(f"Scheduled email checking for chat_id: {chat_id}")
     except Exception as e:
         await update.effective_message.reply_text(f'Error scheduling email checks: {e}')
